@@ -37,7 +37,9 @@ end
 
 def choose_product
   puts "lists of products: #{get_product_name}"
+  puts "Choose a product"
   product = gets.chomp
+  puts "Your choice is: " + product
   if get_product_name.include?(product)
     return get_product(product)
   else
@@ -62,7 +64,12 @@ def delete_product_from_basket
 end
 
 def show_basket
-  puts @basket
+  if !@basket.empty?
+    items = @basket.map { |product| product[:name] }.join(', ')
+    puts "In your basket you can find: #{items}"
+  else
+    puts "Your basket is empty"
+  end
 end
 
 def show_products
@@ -80,7 +87,9 @@ def menu
 
   action = nil
   until action == 6
-    action = $stdin.gets.chomp.to_i
+    puts ""
+    puts "Please enter a number of action"
+    action = gets.chomp.to_i
     case action
     when 1
       show_products
@@ -90,6 +99,8 @@ def menu
       delete_product_from_basket
     when 4
       show_basket
+    when 5
+      break
     end
   end
 end
