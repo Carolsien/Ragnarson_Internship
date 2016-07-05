@@ -1,3 +1,8 @@
+# => TODO
+# => show_basket
+# => storage (how many product we have avaible)
+# => total price in basket + tax
+
 product1 = {
   id: 1,
   name: "Pen",
@@ -55,18 +60,38 @@ end
 
 def add_product_to_basket
   product_to_add = choose_product
-  add(product_to_add)
+  if product_to_add != nil
+    puts "How many of this item would you like to have? "
+    how_many = gets.chomp.to_i
+    if how_many <= 0
+      puts "You can not add less than 0 items or 0 items"
+    else
+      add(product_to_add)
+      product_to_add[:quantity] = how_many
+    end
+  end
 end
 
 def delete_product_from_basket
   product = choose_product
-  @basket.delete(product)
+  if @basket.empty?
+    puts "You can not delete anything"
+  elsif product[:quantity] >= 2
+    puts "How many of this item would you like to delete? "
+    how_many = gets.chomp.to_i
+    if how_many <= 0
+      puts "You can not delete less than 0 items or 0 items"
+    else
+      product[:quantity] = product[:quantity] - how_many
+    end
+  else
+    @basket.delete(product)
+  end
 end
 
 def show_basket
   if !@basket.empty?
-    items = @basket.map { |product| product[:name] }.join(', ')
-    puts "In your basket you can find: #{items}"
+    puts @basket
   else
     puts "Your basket is empty"
   end
@@ -75,7 +100,6 @@ end
 def show_products
   puts "lists of products: #{get_product_name}"
 end
-
 
 def menu
   puts "Possible actions
