@@ -16,6 +16,3 @@ class Product
   end
 
 end
-
-product1 = Product.new(name: "Ball", price: 12, quantity: 1)
-product2 = Product.new(name: "Pen", price: 1, quantity: 2)
