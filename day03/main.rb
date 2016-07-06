@@ -2,8 +2,6 @@
 # => warehouse (how many product we have avaible)
 # => total price in basket + tax
 
-require 'pry'
-
 class Main
   require_relative "./product"
   require_relative "./warehouse"
