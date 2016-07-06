@@ -1,4 +1,4 @@
-class Products
+class Warehouse
   require_relative './product'
 
   def make_list
