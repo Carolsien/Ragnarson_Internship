@@ -1,9 +1,8 @@
 # => TODO
-# => delete_product_from_basket
-# => show_basket
-# => storage (how many product we have avaible)
+# => warehouse (how many product we have avaible)
 # => total price in basket + tax
 
+require 'pry'
 
 class Main
   require_relative "./product"
@@ -11,24 +10,30 @@ class Main
   require_relative "./basket"
 
   attr_reader :action
+  def initialize
+    get_basket
+  end
 
   def get_list
-    list = Warehouse.new
-    @make = list.make_list
+    @get_list ||= Warehouse.new.make_list
   end
 
   def get_basket
     bas = Basket.new
-    @basket = bas.create_basket
+    @basket ||= bas.create_basket
   end
 
-  def choose_product
+  def choose_product(option = "add")
     show_products
     puts "Choose a product"
     product = gets.chomp
     puts "Your choice is: " + product
     if get_product_name.include?(product)
-      return get_product(product)
+      if option == "add"
+        return get_product_from_warehouse(product)
+      else
+        return get_product_from_basket(product)
+      end
     else
       puts "There is no product with name #{product}"
     end
@@ -51,12 +56,10 @@ class Main
 
   def delete_product_from_basket
     p "DELETE A PRODUCT"
-    product = choose_product
-    p "PQ #{product[:quantity]}"
+    product = choose_product("delete")
     if @basket.size == 0
       puts "You can not delete anything because your basket is empty"
     elsif product[:quantity] >= 2
-      p "aaaa"
       puts "How many of this item would you like to delete? "
       how_many = gets.chomp.to_i
       if how_many <= 0
@@ -71,7 +74,10 @@ class Main
 
   def show_basket
     if !@basket.empty?
-      puts @basket
+      ppp = @basket.map do |x|
+        "#{x[:name]} #{x[:quantity]}"
+      end.join(' , ')
+      puts ppp
     else
       puts "Your basket is empty"
     end
@@ -80,22 +86,6 @@ class Main
   def show_products
     puts "lists of products: #{get_product_name}"
   end
-
-  private
-    def get_product_name
-      #Products.new.map(&:name)
-      get_list.map{ |products| products[:name] }.join(', ')
-    end
-
-    def get_product(product_name)
-      get_list.find{|products| products[:name] == product_name }
-    end
-
-    def add(product)
-      if product != nil
-        @basket << product
-      end
-    end
 
   def menu
     puts "Possible actions
@@ -108,7 +98,7 @@ class Main
     until action == 6
       puts ""
       puts "Please enter a number of action"
-      @action = action
+      action = gets.chomp.to_i
       case action
       when 1
         show_products
@@ -123,14 +113,30 @@ class Main
       end
     end
   end
+
+
+  private
+    def get_product_name
+        #Products.new.map(&:name)
+      get_list.map{ |product| product[:name] }.join(', ')
+    end
+
+    def get_product_from_warehouse(product_name)
+      get_list.find{|product| product[:name] == product_name }
+    end
+
+    def get_product_from_basket(product_name)
+      get_basket.find{|product| product[:name] == product_name }
+    end
+
+    def add(product)
+      if product != nil
+        @basket << product
+      end
+    end
+
 end
 
 
 main = Main.new
-main.choose_product
-main.get_basket
-main.add_product_to_basket
-main.add_product_to_basket
-main.show_basket
-main.delete_product_from_basket
-main.show_basket
+main.menu
