@@ -1,5 +1,5 @@
 class Product
-  attr_reader :name, :price
+  attr_reader :name, :price, :quantity
 
   @@id = 0
 
