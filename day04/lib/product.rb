@@ -1,7 +1,10 @@
 class Product
   attr_reader :name, :price
 
+  @@id = 0
+
   def initialize(name, price, quantity)
+    @id = next_id
     @name = name
     @price = price
     @quantity = quantity
@@ -13,6 +16,10 @@ class Product
 
   def price
     @price = set_price
+  end
+
+  def quantity
+    @quantity = set_quantity
   end
 
   private
@@ -39,5 +46,17 @@ class Product
     else
       raise ArgumentError
     end
+  end
+
+  def set_quantity
+    if @quantity.is_a?(Integer)
+      @quantity
+    else
+      raise ArgumentError
+    end
+  end
+
+  def next_id
+    @@id = @@id + 1
   end
 end

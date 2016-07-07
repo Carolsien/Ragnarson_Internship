@@ -94,6 +94,12 @@ RSpec.describe Product do
       }.to raise_error(ArgumentError)
     end
 
+    it "raise error when nil given" do
+      expect{
+        Product.new(nil, nil, nil).name
+      }.to raise_error(ArgumentError)
+    end
+
     it "does not raise error when number with . given" do
       expect{
         Product.new(nil, 12.3 , nil).price
@@ -105,7 +111,31 @@ RSpec.describe Product do
         Product.new(nil, 12, nil).price
       }.not_to raise_error
     end
-
-
   end
+
+  context "#quantity" do
+
+    it "returns 12 when 12 given" do
+      expect(Product.new(nil, nil, 12).quantity).to eq(12)
+    end
+
+    it "raise error when string given" do
+      expect{
+        Product.new(nil, nil, "aa").quantity
+      }.to raise_error(ArgumentError)
+    end
+
+    it "raise error when float given" do
+      expect{
+        Product.new(nil, nil, 12.2).quantity
+      }.to raise_error(ArgumentError)
+    end
+
+    it "does not raise error when number given" do
+      expect{
+        Product.new(nil, nil, 12).quantity
+      }.not_to raise_error
+    end
+  end
+
 end
