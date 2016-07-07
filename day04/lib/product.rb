@@ -15,7 +15,11 @@ class Product
 
   def set_name
     if @name.class == String
-      @name
+      if @name.length > 2
+        @name
+      else
+        raise ArgumentError
+      end
     else
       raise ArgumentError
     end

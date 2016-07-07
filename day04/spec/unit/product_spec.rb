@@ -16,20 +16,44 @@ RSpec.describe Product do
 
   context "#name" do
 
-    it "returns proper value when name given foo " do
+    it "returns proper value when name foo given" do
       expect(Product.new("foo", nil, nil).name).to eql("foo")
     end
 
-    it "does not raise error when string given" do
+    it "raise error when name is empty" do
       expect{
-        Product.new("foo", nil, nil)
-      }.not_to raise_error
+        Product.new("", nil, nil).name
+      }.to raise_error(ArgumentError)
+    end
+
+    it "raise error when name has only 2 characters" do
+      expect{
+        Product.new("ss", nil, nil).name
+      }.to raise_error(ArgumentError)
+    end
+
+    it "raise error when nil given" do
+      expect{
+        Product.new(nil, nil, nil).name
+      }.to raise_error(ArgumentError)
     end
 
     it "raise error when number given" do
       expect{
         Product.new(9, nil, nil).name
       }.to raise_error(ArgumentError)
+    end
+
+    it "does not raise error when string given" do
+      expect{
+        Product.new("foo", nil, nil).name
+      }.not_to raise_error
+    end
+
+    it "does not raise error when name has 4 characters" do
+      expect{
+        Product.new("ssss", nil, nil).name
+      }.not_to raise_error
     end
   end
 end
