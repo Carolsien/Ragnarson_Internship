@@ -2,8 +2,8 @@ require_relative '../../lib/basket'
 
 RSpec.describe Basket do
 
-  it "describe an Array" do
-    expect(Basket.create_basket).to be_a_kind_of(Array)
+  it "returns instance of basket" do
+    expect(Basket.new).to be_a_kind_of(Basket)
   end
 
 
