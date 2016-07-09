@@ -19,7 +19,7 @@ RSpec.describe Warehouse do
       Warehouse.new()
     }
 
-    it "returns instance of product class" do
+    it "returns instance of warehouse class" do
       expect(warehouse).to be_a_kind_of(Warehouse)
     end
 
