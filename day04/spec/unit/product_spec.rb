@@ -9,12 +9,12 @@ RSpec.describe Product do
       expect(Product.new("omg", 12.2, 3)).to be_a_kind_of(Product)
     end
 
-  it "initializes properly" do
-    expect(product.name).to eql("omg")
-    expect(product.price).to eql(12.2)
-    expect(product.quantity).to eql(3)
+    it "initializes properly" do
+      expect(product.name).to eql("omg")
+      expect(product.price).to eql(12.2)
+      expect(product.quantity).to eql(3)
+    end
   end
-end
 
   context "has params" do
     it "has 3 params" do
