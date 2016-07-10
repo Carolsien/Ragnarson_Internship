@@ -8,22 +8,6 @@ RSpec.describe Main do
     Main.new
   }
 
-  let(:product1){
-    Product.new("Pen", 1.2, 1)
-  }
-
-  let(:product2){
-    Product.new("Notebook", 2, 1)
-  }
-
-  let(:product3){
-    Product.new("Pencil", 1.5, 1)
-  }
-
-  let(:basket) do [
-    product1,
-    Product.new("Notebook", 2, 1)
-  ] end
 
 
   context ".choose_product" do
