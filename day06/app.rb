@@ -13,8 +13,12 @@ end
 class App < Sinatra::Base
 
   get "/" do
-    @products = Products.new.call
     erb :index
+  end
+
+  get "/products" do
+    @products = Products.new.call
+    erb :list_of_products
   end
 
   get "/products/:id" do
