@@ -1,0 +1,19 @@
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% basket.each do |basket| %>
+    <tr>
+      <td><%= basket[:product] %></td>
+      <td><%= basket[:product] %></td>
+      <td><%= basket[:quantity] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

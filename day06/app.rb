@@ -1,14 +1,19 @@
 require "sinatra/base"
-require_relative "lib/product"
+require_relative "lib/models/product"
+require_relative "lib/models/basket"
+require_relative "lib/services/fetch_basket"
+require_relative "lib/services/fetch_product"
+require_relative "lib/services/fetch_products"
+require_relative "lib/services/add_to_basket"
 
-class Products
-  def call
-    [
-      Product.new(id: 1, name: "tea"),
-      Product.new(id: 2, name: "coffee")
-    ]
-  end
-end
+
+PRODUCTS = [
+  Product.new( id: 1, name: "tea", price: 7, quantity: 1 ),
+  Product.new( id: 2, name: "coffee", price: 8, quantity: 1 )
+
+]
+
+BASKET = []
 
 class App < Sinatra::Base
 
@@ -17,13 +22,23 @@ class App < Sinatra::Base
   end
 
   get "/products" do
-    @products = Products.new.call
+    @products = FetchProducts.new.call
     erb :list_of_products
   end
 
-  get "/products/:id" do
-    @product = Products.new.call.find{ |product| product.id.to_i == params[:id].to_i}
-    erb :show
+  get "/products/:id" do |id|
+    @product = FetchProduct.new.call(id)
+    erb :show_product
+  end
+
+  get "/basket" do
+    products_in_basket = FetchBasket.new.call
+    erb :show_basket, locals: { basket: products_in_basket }
+  end
+
+  post "/basket" do
+    AddToBasket.new(params).call
+    redirect "/"
   end
 
 end
