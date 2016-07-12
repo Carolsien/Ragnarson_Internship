@@ -17,6 +17,12 @@ class App < Sinatra::Base
     erb :index
   end
 
+
+  get "/products" do
+    @products = Products.new.call
+    erb :list_of_products
+  end
+
   get "/products/:id" do
     @product = Products.new.call.find{ |product| product.id.to_i == params[:id].to_i}
     erb :show
