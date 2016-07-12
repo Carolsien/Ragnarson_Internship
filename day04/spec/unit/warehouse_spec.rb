@@ -16,7 +16,7 @@ RSpec.describe Warehouse do
     }
 
     let (:warehouse) {
-      Warehouse.new()
+      Warehouse.new
     }
 
     it "returns instance of warehouse class" do
