@@ -9,4 +9,9 @@ class Basket
   def all
       FetchProduct.new.call(product_id)
   end
+
+  def total_price
+    product = all
+    product.price * quantity
+  end
 end
