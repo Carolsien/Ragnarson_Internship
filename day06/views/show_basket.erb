@@ -10,8 +10,8 @@
   <tbody>
     <% basket.each do |basket| %>
     <tr>
-      <td><%= basket[:product] %></td>
-      <td><%= basket[:product] %></td>
+      <td><%= basket[:product].name %></td>
+      <td><%= basket[:product].price %></td>
       <td><%= basket[:quantity] %></td>
     </tr>
     <% end %>

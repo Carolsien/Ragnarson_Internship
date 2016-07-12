@@ -7,9 +7,6 @@ class Basket
   end
 
   def all
-    {
-      product: PRODUCTS.find{|product| product.id.to_i == @product_id.to_i },
-      quantity: @quantity
-    }
+      FetchProduct.new.call(product_id)
   end
 end
