@@ -1,5 +1,6 @@
 class Basket
-  attr_reader :product_id, :quantity
+  attr_reader :product_id
+  attr_accessor :quantity
 
   def initialize(product_id:, quantity:)
     @product_id = product_id
