@@ -50,8 +50,12 @@ class App < Sinatra::Base
   end
 
   post "/basket" do
-    AddToBasket.new( params ).call
-    redirect "/products"
+    begin
+      AddToBasket.new( params ).call
+      redirect "/products"
+    rescue KeyError
+      halt 422
+    end
   end
 
   post "/basket/delete" do
