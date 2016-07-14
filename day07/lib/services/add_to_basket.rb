@@ -1,5 +1,3 @@
-require "pry"
-
 class AddToBasket
 
   def initialize( params )
@@ -9,7 +7,6 @@ class AddToBasket
 
   def call
     product = find_product_in_basket( @product_id )
-  #  binding.pry
     if product.nil?
       BASKET << Basket.new(
       product_id: @product_id,
