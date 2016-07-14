@@ -1,4 +1,5 @@
 class FetchBasket
+
   def call
     BASKET.map do |basket|
       {
@@ -8,4 +9,5 @@ class FetchBasket
       }
     end
   end
+  
 end
