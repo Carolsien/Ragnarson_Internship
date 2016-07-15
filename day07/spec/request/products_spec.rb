@@ -5,7 +5,7 @@ RSpec.describe "GET /products", type: :request do
     do_request
   end
 
-  it "returns  200 HTTP code" do
+  it "returns 200 HTTP code" do
     expect( last_response.status ).to eql( 200 )
   end
 
