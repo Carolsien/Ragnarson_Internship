@@ -6,14 +6,14 @@ class AddToBasket
   end
 
   def call
-    product = find_product_in_basket( @product_id )
-    if product.nil?
+     product = find_product_in_basket( @product_id )
+     if product.nil?
       BASKET << Basket.new(
       product_id: @product_id,
       quantity: @quantity )
-    else
-      product.quantity = product.quantity + @quantity
-    end
+     else
+       product.quantity = product.quantity + @quantity
+     end
   end
 
   def find_product_in_basket( product_id )

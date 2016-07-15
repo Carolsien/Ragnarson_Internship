@@ -36,16 +36,21 @@ RSpec.describe "GET /basket", type: :request do
       expect( last_response.body ).to include( "<td>Summary</td>" )
     end
 
-end
+  end
 
   context "show basket with product" do
+
+    let(:added_product){
+      AddToBasket.new( {
+        "product_id" => product.id,
+        "quantity" => 1
+        } ).call
+    }
+
     let(:product){
       FetchProducts.new.call.first
     }
 
-    let(:added_product){
-      AddToBasket.new( product ).call
-    }
 
     before do
       do_request
