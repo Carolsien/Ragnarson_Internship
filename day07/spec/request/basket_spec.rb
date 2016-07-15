@@ -40,14 +40,14 @@ RSpec.describe "GET /basket", type: :request do
 
   context "show basket with product" do
 
-    let(:added_product){
+    let!(:added_product){
       AddToBasket.new( {
         "product_id" => product.id,
         "quantity" => 1
         } ).call
     }
 
-    let(:product){
+    let!(:product){
       FetchProducts.new.call.first
     }
 
