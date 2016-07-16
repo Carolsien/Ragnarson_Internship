@@ -2,7 +2,7 @@ require_relative '../../lib/product.rb'
 
 RSpec.describe Product do
 
-  describe ".new" do
+  describe "#new" do
     let (:product) {Product.new("omg",12.2, 3)}
 
     it "returns instance of product class" do

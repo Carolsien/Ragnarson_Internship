@@ -1,33 +1,27 @@
 require_relative '../../lib/main.rb'
 
-require 'pry'
 RSpec.describe Main do
-
 
   let(:main) {
     Main.new
   }
 
-
-
-  context ".choose_product" do
+  context "#choose_product" do
 
     it "returns a product" do
       allow(main).to receive(:gets).and_return("Pen")
-      #binding.pry
       expect(main.choose_product).to be_a_kind_of(Hash)
     end
 
     it "choose existing product" do
       allow(main).to receive(:gets).and_return("Pen")
-      #binding.pry
       expect(main.choose_product).to be_a_kind_of(Hash)
       expect(main.choose_product[:name]).to eq("Pen")
     end
 
   end
 
-  context ".add_product_to_basket" do
+  context "#add_product_to_basket" do
 
     it "add product from warehouse" do
       double1 = double
@@ -36,28 +30,10 @@ RSpec.describe Main do
       expect{main.add_product_to_basket}.to change{main.get_basket.size}.from(0).to(1)
     end
 
-    it "add product from basket" do
-
-    end
   end
 
-  context ".delete_product_from_basket" do
+  context "#get_basket" do
 
-    it "deletes product from basket" do
-
-    end
-
-    it "deletes one piece of the product from basket" do
-
-    end
-
-  end
-
-  context ".show_basket" do
-
-  end
-
-  context ".get_basket" do
     it "returns an array" do
       expect(main.get_basket).to be_a_kind_of(Array)
     end
@@ -68,12 +44,11 @@ RSpec.describe Main do
 
     it "returns one product" do
       prod = main.get_basket.find{|product| product[:name] == "Pen" }
-    #  expect(main.add_product_to_basket).to eql()
     end
 
   end
 
-  context ".show_products" do
+  context "#show_products" do
 
     it "returns an array" do
       expect(main.get_list).to be_a_kind_of(Array)
