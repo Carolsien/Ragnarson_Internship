@@ -25,6 +25,10 @@ BASKET = []
 
 class App < Sinatra::Base
 
+  configure :test do
+    set :dump_errors, false
+  end
+
   get "/" do
     erb :index
   end
@@ -36,6 +40,7 @@ class App < Sinatra::Base
 
   get "/products/:id" do |id|
     @product = FetchProduct.new.call( id )
+    halt 404 unless @product
     erb :show_product
   end
 
@@ -45,8 +50,12 @@ class App < Sinatra::Base
   end
 
   post "/basket" do
-    AddToBasket.new( params ).call
-    redirect "/products"
+    begin
+      AddToBasket.new( params ).call
+      redirect "/products"
+    rescue KeyError
+      halt 422
+    end
   end
 
   post "/basket/delete" do
