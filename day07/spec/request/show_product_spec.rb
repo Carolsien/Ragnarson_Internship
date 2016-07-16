@@ -2,7 +2,6 @@ require "web_helper"
 
 RSpec.describe "GET /products/:id", type: :request do
   context "without existing product" do
-
     before do
       do_request( 50 )
     end
@@ -14,13 +13,10 @@ RSpec.describe "GET /products/:id", type: :request do
     it "returns valid html Content-Type" do
       expect( last_response.headers["Content-Type"] ).to include( "text/html" )
     end
-
   end
 
   context "with existing product" do
-    let(:product){
-      FetchProducts.new.call.first
-    }
+    let(:product){ FetchProducts.new.call.first }
 
     before do
       do_request( product.id )

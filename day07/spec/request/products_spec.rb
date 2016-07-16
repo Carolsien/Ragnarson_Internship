@@ -25,5 +25,4 @@ RSpec.describe "GET /products", type: :request do
     def do_request
       get "/products"
     end
-
 end

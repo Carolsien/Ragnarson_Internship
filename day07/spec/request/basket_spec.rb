@@ -1,9 +1,7 @@
 require "web_helper"
 
 RSpec.describe "GET /basket", type: :request do
-
   context "show empty basket" do
-
     before do
       do_request
     end
@@ -35,22 +33,12 @@ RSpec.describe "GET /basket", type: :request do
     it "returns element with 'Summary'" do
       expect( last_response.body ).to include( "<td>Summary</td>" )
     end
-
   end
 
   context "show basket with product" do
-
-    let!(:added_product){
-      AddToBasket.new( {
-        "product_id" => product.id,
-        "quantity" => 1
-        } ).call
-    }
-
-    let!(:product){
-      FetchProducts.new.call.first
-    }
-
+    let!(:added_product){ AddToBasket.new(
+      { "product_id" => product.id, "quantity" => 1} ).call }
+    let!(:product) { FetchProducts.new.call.first }
 
     before do
       do_request
@@ -99,12 +87,10 @@ RSpec.describe "GET /basket", type: :request do
     it "contains a button with name Delete form basket" do
       expect( last_response.body ).to include( "<input type=\"submit\" value=\"Delete from basket\">" )
     end
-
   end
 
   private
     def do_request
       get "/basket"
     end
-
 end

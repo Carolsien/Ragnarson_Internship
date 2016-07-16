@@ -1,11 +1,8 @@
 require "web_helper"
 
 RSpec.describe "POST /basket", type: :request do
-
   context "invalid params" do
-    let( :invalid_params ){
-      { foo: 'bar' }
-    }
+    let( :invalid_params ) { { foo: 'bar' } }
 
     before do
       do_request( invalid_params )
@@ -17,16 +14,8 @@ RSpec.describe "POST /basket", type: :request do
   end
 
   context "valid params" do
-    let(:product) {
-      FetchProduct.new.call
-    }
-
-    let( :valid_params ){
-      {
-        product_id: 1,
-        quantity: 1
-      }
-    }
+    let(:product) { FetchProduct.new.call }
+    let(:valid_params) { { product_id: 1, quantity: 1 } }
 
     before do
       do_request( valid_params )
@@ -55,5 +44,4 @@ RSpec.describe "POST /basket", type: :request do
     def do_request(params={})
       post "/basket", params
     end
-
 end
