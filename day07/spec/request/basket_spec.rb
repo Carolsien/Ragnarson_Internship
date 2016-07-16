@@ -88,6 +88,14 @@ RSpec.describe "GET /basket", type: :request do
       expect( last_response.body ).to include("#{product.name}")
     end
 
+    it "contains product price" do
+      expect( last_response.body ).to include("#{product.price}")
+    end
+
+    it "contains product quantity" do
+      expect( last_response.body ).to include("#{product.quantity}")
+    end
+
     it "contains a button with name Delete form basket" do
       expect( last_response.body ).to include( "<input type=\"submit\" value=\"Delete from basket\">" )
     end
